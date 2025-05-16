@@ -1,0 +1,61 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 160 15% 95%;
+    --foreground: 20 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 10% 10%;
+
+    --primary: 160 33% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 160 29% 57%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 160 10% 90%;
+    --muted-foreground: 25 5% 45%;
+
+    --accent: 30 85% 71%;
+    --accent-foreground: 20 10% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 5% 85%;
+    --input: 20 5% 85%;
+    --ring: 160 33% 45%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-donation-background text-donation-text;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.donation-card {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+.message-bubble-sender {
+  @apply bg-donation-primary text-white rounded-2xl rounded-tr-none p-3;
+}
+
+.message-bubble-receiver {
+  @apply bg-gray-200 rounded-2xl rounded-tl-none p-3;
+}
