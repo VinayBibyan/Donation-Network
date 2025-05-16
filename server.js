@@ -35,13 +35,33 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // API routes
+// API routes - individually wrapped in try/catch to debug path-to-regexp errors
 try {
+  console.log('Registering user routes');
   app.use('/api/users', userRoutes);
+} catch (error) {
+  console.error('User route registration error:', error);
+}
+
+try {
+  console.log('Registering item routes');
   app.use('/api/items', itemRoutes);
+} catch (error) {
+  console.error('Item route registration error:', error);
+}
+
+try {
+  console.log('Registering need routes');
   app.use('/api/needs', needRoutes);
+} catch (error) {
+  console.error('Need route registration error:', error);
+}
+
+try {
+  console.log('Registering message routes');
   app.use('/api/messages', messageRoutes);
 } catch (error) {
-  console.error('Route registration error:', error);
+  console.error('Message route registration error:', error);
 }
 
 // Serve static assets in production
