@@ -14,16 +14,14 @@ import upload from '../middleware/uploadMiddleware.js';
 
 const router = express.Router();
 
-router.route('/')
-  .get(getItems)
-  .post(protect, upload.single('image'), createItem);
-
+// Fix any potentially problematic route paths
+router.get('/', getItems);
+router.post('/', protect, upload.single('image'), createItem);
 router.get('/user/items', protect, getUserItems);
 router.put('/:id/status', protect, updateItemStatus);
 
-router.route('/:id')
-  .get(getItemById)
-  .put(protect, upload.single('image'), updateItem)
-  .delete(protect, deleteItem);
+router.get('/:id', getItemById);
+router.put('/:id', protect, upload.single('image'), updateItem);
+router.delete('/:id', protect, deleteItem);
 
 export default router;

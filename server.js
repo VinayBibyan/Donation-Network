@@ -35,10 +35,14 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // API routes
-app.use('/api/users', userRoutes);
-app.use('/api/items', itemRoutes);
-app.use('/api/needs', needRoutes);
-app.use('/api/messages', messageRoutes);
+try {
+  app.use('/api/users', userRoutes);
+  app.use('/api/items', itemRoutes);
+  app.use('/api/needs', needRoutes);
+  app.use('/api/messages', messageRoutes);
+} catch (error) {
+  console.error('Route registration error:', error);
+}
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
@@ -48,6 +52,12 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
   });
 }
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Express error:', err.stack);
+  res.status(500).json({ message: 'Server error', error: process.env.NODE_ENV === 'production' ? 'An error occurred' : err.message });
+});
 
 // Start server
 app.listen(PORT, () => {

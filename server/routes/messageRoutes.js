@@ -12,8 +12,7 @@ const router = express.Router();
 router.use(protect); // All message routes require authentication
 
 router.get('/conversations', getConversations);
-router.route('/:userId')
-  .get(getMessages)
-  .post(sendMessage);
+router.get('/:userId', getMessages);
+router.post('/:userId', sendMessage);
 
 export default router;
