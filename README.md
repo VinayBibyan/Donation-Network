@@ -1,5 +1,5 @@
 
-# KindShare Application
+# Donation Network Application
 
 A platform for sharing items and fulfilling community needs.
 
